@@ -173,8 +173,8 @@ class Main {
                 .append("path")
                 .attr("class", "pass_ball_pinlv_t1")
                 .merge(pass_ball_pinlv_t1)
-                .attr("stroke", "#dda977")
-                .attr("fill", "#dda977")
+                .attr("stroke", "rgba(242,142,43,0.7)")
+                .attr("fill", "rgba(242,142,43,0.7)")
                 .attr("stroke-width", 1)
                 .attr("stroke-linejoin", "round")
                 .attr("d", d3.area()
@@ -186,8 +186,8 @@ class Main {
                 .append("path")
                 .attr("class", "pass_ball_pinlv_t2")
                 .merge(pass_ball_pinlv_t2)
-                .attr("stroke", "#85d8e9")
-                .attr("fill", "#85d8e9")
+                .attr("stroke", "rgba(30,195,255,0.64)")
+                .attr("fill", "rgba(30,195,255,0.64)")
                 .attr("stroke-width", 1)
                 .attr("stroke-linejoin", "round")
                 .attr("d", d3.area()
@@ -352,7 +352,7 @@ class Main {
                 .attr("height", height + margin.top + margin.bottom);
 
             innerField.append("defs").append("marker")
-                .attr("fill", "#95491F")
+                .attr("fill", "#95491f")
                 .attr("id", "endmarkerA")
                 .attr("viewBox", "0 -5 10 10")
                 .attr("refX", 30)
@@ -610,28 +610,59 @@ class Main {
             echarts.dispose(document.getElementById('main_echart'));//销毁之前的图
             echarts.dispose(document.getElementById('main_echart_b'));
             echarts.dispose(document.getElementById('main_echart_c'));
+            // function get_option(sc, big = false) {
+            //     var option = {
+            //         legend: {},
+            //         tooltip: {},
+            //         backgroundColor: '#ffffff',//背景色
+            //         dataset: { source: sc },
+            //         xAxis: { type: 'category' },
+            //         yAxis: big ? {
+            //             type: 'log',
+            //             min: 1,
+            //             logBase: 10
+            //         } : {},
+            //         series: Array(sc[0].length - 1).fill({ type: 'bar' }),
+            //         grid: {
+            //             left: '3%', //默认10%
+            //             right: '4%', //默认10%
+            //             bottom: '5%', //默认60
+            //             containLabel: true //grid区域是否包含坐标轴的刻度标签
+            //         }
+            //     };
+            //     return option;
+            // }
             function get_option(sc, big = false) {
-                var option = {
-                    legend: {},
-                    tooltip: {},
-                    backgroundColor: '#ffffff',//背景色
-                    dataset: { source: sc },
-                    xAxis: { type: 'category' },
-                    yAxis: big ? {
-                        type: 'log',
-                        min: 1,
-                        logBase: 10
-                    } : {},
-                    series: Array(sc[0].length - 1).fill({ type: 'bar' }),
-                    grid: {
-                        left: '3%', //默认10%
-                        right: '4%', //默认10%
-                        bottom: '5%', //默认60
-                        containLabel: true //grid区域是否包含坐标轴的刻度标签
-                    }
-                };
-                return option;
-            }
+                    const colors = big ?
+                        ['#4C78A8','#F28E2B','#76B7B2'] :
+                        ['#4C78A8','#F28E2B','#76B7B2'];
+
+                    var option = {
+                        legend: {},
+                        tooltip: {},
+                        backgroundColor: '#ffffff', // 背景色
+                        dataset: { source: sc },
+                        xAxis: { type: 'category' },
+                        yAxis: big ? {
+                            type: 'log',
+                            min: 1,
+                            logBase: 10
+                        } : {},
+                        series: Array(sc[0].length - 1).fill().map((_, index) => ({
+                            type: 'bar',
+                            itemStyle: {
+                                color: colors[index]
+                            }
+                        })),
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '5%',
+                            containLabel: true
+                        }
+                    };
+                    return option;
+                }
             const chooseplayer = _this._thisplayer;
             if (chooseplayer !== null) {
                 pass_ball = pass_ball.filter(d => {
