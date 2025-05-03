@@ -1,0 +1,63 @@
+minute,second,kongqiu_team,pass_player_name,pass_location_x,pass_location_y,jieqiu_team,jieqiu_player_name,end_location_x,end_location_y
+0,1,NOP,Eric Gordon,67.11559,37.02484,NOP,Anthony Davis,67.93588,24.69887
+0,20,DAL,Jose Juan Barea,79.04347,36.1947,DAL,Chandler Parsons,85.12043,31.29813
+0,28,DAL,Chandler Parsons,82.76284,30.63862,DAL,Zaza Pachulia,84.41172,17.09116
+0,29,DAL,Chandler Parsons,82.53083,30.44149,NOP,Anthony Davis,81.24491,12.82439
+0,40,NOP,Anthony Davis,74.7506,6.48539,NOP,Norris Cole,67.64277,38.07679
+0,42,NOP,Anthony Davis,73.0489,5.81925,DAL,Jose Juan Barea,84.41923,21.62432
+0,51,DAL,Jose Juan Barea,86.98503,16.67713,DAL,Dirk Nowitzki,90.2064,26.47609
+0,53,DAL,Dirk Nowitzki,91.62123,26.45132,DAL,Wesley Mattews,58.49216,31.6247
+1,9,DAL,Wesley Mattews,40.10743,26.26197,DAL,Zaza Pachulia,51.61643,15.61171
+1,30,NOP,Omer Asik,21.8145,22.56714,NOP,Norris Cole,43.51621,26.37753
+1,50,DAL,Dirk Nowitzki,47.46934,22.5204,DAL,Jose Juan Barea,47.498,27.85277
+2,27,NOP,Alonzo Gee,17.02879,14.26075,NOP,Norris Cole,17.6709,41.64395
+2,33,NOP,Norris Cole,13.74573,41.74331,NOP,Omer Asik,7.19878,20.21832
+2,53,NOP,Alonzo Gee,9.75228,35.70757,NOP,Anthony Davis,11.12517,20.10229
+3,10,DAL,Dirk Nowitzki,23.9363,21.11646,DAL,Jose Juan Barea,17.46659,43.87176
+3,15,DAL,Jose Juan Barea,23.97757,40.33666,DAL,Dirk Nowitzki,28.44526,20.70549
+3,45,NOP,Anthony Davis,62.20349,9.44845,NOP,Toney Douglas,35,39
+3,52,NOP,Toney Douglas,61,40,NOP,Eric Gordon,71.57779,48.82962
+4,14,DAL,Chandler Parsons,86.85303,31.89967,DAL,Jose Juan Barea,75.00699,15.40157
+4,34,DAL,Jose Juan Barea,73.95513,12.05931,DAL,Zaza Pachulia,81.26695,11.51963
+4,46,NOP,Toney Douglas,61,40,NOP,Anthony Davis,80.15404,10.23495
+5,10,DAL,Chandler Parsons,81.6543,35.46151,DAL,Dirk Nowitzki,76.97927,23.92957
+5,13,DAL,Dirk Nowitzki,75.4842,22.34414,DAL,Wesley Mattews,78.81381,33.37137
+5,27,DAL,Wesley Mattews,74.75486,32.4408,DAL,Zaza Pachulia,62.99171,21.2167
+5,33,DAL,Zaza Pachulia,53.10168,21.83778,DAL,Jose Juan Barea,46.31752,29.26396
+6,12,DAL,Chandler Parsons,11.2492,48.42474,DAL,Jose Juan Barea,13.04141,18.94053
+6,38,DAL,Jose Juan Barea,61,40,DAL,Dirk Nowitzki,35,39
+7,19,NOP,Eric Gordon,61,40,NOP,Norris Cole,35,39
+7,20,NOP,Eric Gordon,61,40,DAL,Jose Juan Barea,35,39
+7,41,DAL,Wesley Mattews,61,40,DAL,Jose Juan Barea,35,39
+7,53,DAL,Jose Juan Barea,61,40,DAL,Chandler Parsons,35,39
+8,28,NOP,Norris Cole,61,40,NOP,Eric Gordon,35,39
+8,42,DAL,Jose Juan Barea,61,40,DAL,Wesley Mattews,35,39
+9,40,NOP,Alonzo Gee,19.68403,21.28617,NOP,Eric Gordon,16.27321,44.24863
+12,45,NOP,Norris Cole,61,40,NOP,Eric Gordon,35,39
+13,4,DAL,Chandler Parsons,61,40,DAL,Jose Juan Barea,35,39
+13,8,DAL,Jose Juan Barea,61,40,DAL,Dirk Nowitzki,35,39
+13,12,DAL,Dirk Nowitzki,61,40,DAL,Wesley Mattews,35,39
+13,15,DAL,Wesley Mattews,61,40,DAL,Chandler Parsons,35,39
+13,20,DAL,Chandler Parsons,61,40,DAL,Jose Juan Barea,35,39
+13,25,DAL,Jose Juan Barea,61,40,DAL,Chandler Parsons,35,39
+13,28,DAL,Chandler Parsons,61,40,DAL,Dirk Nowitzki,35,39
+13,31,DAL,Dirk Nowitzki,61,40,DAL,Jose Juan Barea,35,39
+13,36,DAL,Jose Juan Barea,61,40,DAL,Zaza Pachulia,35,39
+14,36,NOP,Norris Cole,61,40,NOP,Alonzo Gee,35,39
+14,53,NOP,Alonzo Gee,61,40,NOP,Norris Cole,35,39
+14,58,NOP,Norris Cole,61,40,NOP,Anthony Davis,35,39
+15,0,NOP,Norris Cole,61,40,DAL,Zaza Pachulia,35,39
+15,4,DAL,Zaza Pachulia,61,40,DAL,Chandler Parsons,35,39
+15,6,DAL,Chandler Parsons,61,40,DAL,Wesley Mattews,35,39
+15,50,NOP,Norris Cole,61,40,NOP,Anthony Davis,35,39
+16,1,NOP,Jrue Holiday,61,40,NOP,Norris Cole,35,39
+16,32,DAL,Deron Williams,61,40,DAL,Raymond Felton,35,39
+16,37,DAL,Raymond Felton,61,40,DAL,Deron Williams,35,39
+17,3,DAL,Deron Williams,61,40,DAL,Zaza Pachulia,19.84156,25.19361
+17,4,DAL,Deron Williams,61,40,NOP,Kendrick Perkins,35,39
+17,49,NOP,Kendrick Perkins,61,40,NOP,Norris Cole,35,39
+18,2,NOP,Norris Cole,61,40,NOP,Anthony Davis,35,39
+18,36,NOP,Anthony Davis,61,40,NOP,Eric Gordon,35,39
+19,6,DAL,Raymond Felton,61,40,DAL,Zaza Pachulia,35,39
+19,41,DAL,Zaza Pachulia,19.04461,25.05195,DAL,Dwight Powell,35,39
+19,42,DAL,Zaza Pachulia,18.91398,25.05269,NOP,Anthony Davis,6.29475,16.91414
