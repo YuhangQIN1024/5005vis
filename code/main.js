@@ -575,7 +575,7 @@ class Main {
                 await _this.timeline_uptime();
             }
             this._not_first_draw = true;
-            _this.draw();
+            // _this.draw();
         }
         return this;
     }
@@ -1057,7 +1057,7 @@ class Qiuchang {
             .attr('y', 430)
             .attr('width', 50)
             .attr('height', 12)
-            .attr('fill', 'skyblue')
+            .attr('fill', '#76B7B2')
 
         this.svg.append("text")
             .attr("x", 426)
@@ -1090,9 +1090,37 @@ class Qiuchang {
 }
 
 class Toulan {
+    // constructor(svg, qiuyuan, time, period) {
+    //     this.svg = svg;
+    //     this.played = false;
+    //     this.all_player_toulan = d3.csv(`./data/all_players.csv`)
+    //     d3.csv(`./data/all_players.csv`)
+    //         .then(function (d) {
+    //             d.forEach(player => {
+    //                 const shijian = time === undefined ? true : player.game_time === time;
+    //                 const saiji = period === undefined ? true : period.period === period;
+    //                 if (player.name === qiuyuan && shijian && saiji) {
+    //                     this.played = true;
+    //                     if (player.toulan_cengong === "1") {
+    //                         this.drawtoulan([player.x, player.y], "成功");
+    //                     } else {
+    //                         this.drawtoulan([player.x, player.y], "失败");
+    //                     }
+    //                 }
+    //             })
+    //             if (!this.played) this.meiyou();
+    //         }.bind(this))
+    // }
     constructor(svg, qiuyuan, time, period) {
         this.svg = svg;
         this.played = false;
+
+        // Check if player name is "aaa" - if so, don't proceed with data loading/display
+        if (qiuyuan === "aaa") {
+            this.meiyou();
+            return; // Exit the constructor early
+        }
+
         this.all_player_toulan = d3.csv(`./data/all_players.csv`)
         d3.csv(`./data/all_players.csv`)
             .then(function (d) {
@@ -1111,7 +1139,6 @@ class Toulan {
                 if (!this.played) this.meiyou();
             }.bind(this))
     }
-
     meiyou() {
         this.svg.append("text")
             .attr("x", 50)
@@ -1119,7 +1146,7 @@ class Toulan {
             .attr("dy", ".35em")
             .attr("font-size", 34)
             .attr("font-family", "Oswald")
-            .text("没有记录")
+            .text("")
             .style("fill", "#D5D5D5")
     }
 
@@ -1135,7 +1162,7 @@ class Toulan {
                 })
                 .attr("stroke", "white")
                 .attr('transform', 'translate(250, 52.5)')
-                .attr("fill", "skyblue")
+                .attr("fill", "#76B7B2")
                 .attr("fill-opacity", 0.7)
                 .attr("stroke-width", "0.1px");
         } else if (toulan_jieguo === "失败") {

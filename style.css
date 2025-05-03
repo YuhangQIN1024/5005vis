@@ -2,7 +2,7 @@
 html {
 	min-width: 2000px;
 }
- 
+
 body {
 	color: white;
 	font-family: atrament-web, sans-serif;
@@ -19,7 +19,7 @@ body {
 
 #main{
 	position: relative;
-	left: 0px;
+	left: 10px;
 	top: 60px;
 }
 
@@ -46,27 +46,32 @@ body {
 	width: 1400px;
 }
 
+
 #main_echart{
-	top: -150px;
-	width: 600px;
+	top: 50px;
+	width: 450px;
 	height:400px;
 	float: right;
-	margin-right: 10px;
+	left:100px;
+	margin-right: 5px;
 }
 
 #main_echart_b{
-	top: -150px;
-	width: 600px;
+	top: 50px;
+	width: 450px;
 	height:400px;
 	float: right;
-	margin-right: 10px;
+	left: 100px;
+	margin-right: 5px;
 }
 
 #main_echart_c{
-	top: -150px;
-	width: 600px;
+	top: 50px;
+	width: 450px;
 	height:400px;
 	float: right;
+	left: 100px;
+	margin-right: 5px;
 }
 
 #div1{
@@ -91,7 +96,42 @@ body {
 	font-family: Futura;
 	font-size: 14px;
 }
-
+#lLegends{
+	position: relative;
+	left: 250px;
+	top: -1070px;
+	pointer-events: all;
+	z-index: 0;
+	/*font-family: Futura;*/
+	font-size: 16px;
+}
+/*#hLegends{*/
+/*	position: relative;*/
+/*	left: 250px;*/
+/*	top: -120px;*/
+/*	pointer-events: all;*/
+/*	z-index: 0;*/
+/*	!*font-family: Futura;*!*/
+/*	font-size: 40px;*/
+/*}*/
+#qLegends{
+	position: relative;
+	left: 540px;
+	top: -1100px;
+	pointer-events: all;
+	z-index: 0;
+	/*font-family: Futura;*/
+	font-size: 16px;
+}
+#sLegends{
+	position: relative;
+	left: 272px;
+	top: 232px;
+	pointer-events: all;
+	z-index: 0;
+	/*font-family: Futura;*/
+	font-size: 16px;
+}
 #pics{
 	display: flex;
 	position: relative;
@@ -101,4 +141,12 @@ body {
 #pic1{
 	margin-left: 200px;
 	margin-right: 300px;
+}
+#bottom_visuals {
+    /*display: flex;*/
+    /*justify-content: center; !* Center elements horizontally *!*/
+    /*gap: 20px; !* Space between shottracker and echarts *!*/
+    /*margin-top: 50px; !* Space from above content *!*/
+    /*margin-bottom: 1000px; !* Space from page bottom *!*/
+    width: 100%;
 }
