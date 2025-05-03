@@ -801,9 +801,9 @@ class Main {
                     .attr("marker-end", d => {
                         let T;
                         if (d.team.id === teams[0].team_id)
-                            T = "1";
+                            T = "A";
                         else if (d.team.id === teams[1].team_id)
-                            T = "2";
+                            T = "B";
                         return `url(#endmarker${T})`;
                     })
                     .attr("d", d => {
