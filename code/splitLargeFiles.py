@@ -28,7 +28,7 @@ def split_csv(input_file, output_dir, max_size_mb=100):
         partition = df.iloc[start_idx:end_idx]
         
         # Generate output filename
-        output_file = os.path.join(output_dir, f'players_shooting_stats_part_{i+1}.csv')
+        output_file = os.path.join(output_dir, f'simplified_shot_data_part_{i+1}.csv')
         
         # Save partition
         partition.to_csv(output_file, index=False)
@@ -39,6 +39,6 @@ def split_csv(input_file, output_dir, max_size_mb=100):
 
 if __name__ == "__main__":
     # Run the function
-    input_file = './data/simplified_shooting_stats.csv'
+    input_file = './data/simplified_shot_data.csv'
     output_dir = './data'
     split_csv(input_file, output_dir)

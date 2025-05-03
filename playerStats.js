@@ -14,7 +14,8 @@ const gpFilter = d3.select('#gpFilter');
 const mpgFilter = d3.select('#mpgFilter');
 
 const shootingFiles = [
-  'data/simplified_shot_data.csv'
+  'data/simplified_shot_data_part_1.csv',
+  'data/simplified_shot_data_part_2.csv'
 ];
 
 const searchResults = d3.select('#searchResults');
