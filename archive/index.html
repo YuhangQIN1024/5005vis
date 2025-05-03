@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NBA</title>
+    <link rel="stylesheet" href="code/main.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script>
+        var d3v3 = d3;
+        window.d3 = null;
+    </script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script src="code/main.js"></script>
+</head>
+<body>
+    <div id="main_div">
+
+            <select id="match" onclick="change()">
+                <option value="0021500501">NOP vs DAL</option>
+                <option value="0021500492">TOR vs CHA</option>
+            </select>
+            <div id="team" style="margin-left: 100px;"></div>
+        </div>
+        <div id="main"></div>
+        <div id="div1">
+            <div id="timeline"></div>
+        </div>
+        <div id="pLegends">
+            <svg width="300" height="140">
+                <line x1="0" y1="10" x2="50" y2="10" style="stroke:black;stroke-width:2" />
+                <text x='55' y='15'> Completed pass</text>
+                <line x1="0" y1="60" x2="50" y2="60" style="stroke:black;stroke-width:2; stroke-dasharray:4" />
+                <text x='55' y='65'> Incomplete pass</text>
+                <text x='0' y='100'> Passes (color intensity)</text>
+                <text x='0' y='135'> Made shots (white border)</text>
+            </svg>
+        </div>
+
+        <svg id='tLegends' width='250' height='300'>
+            <text x='0' y='15' style='font-size: 20'>Pass frequency</text>
+            <polygon points="10,80 20,62 30,80" style="fill:MediumSeaGreen" />
+            <text x='40' y='80'> Made</text>
+            <polygon points="10,110 20,92 30,110" style="fill:IndianRed" />
+            <text x='40' y='110'> Missed</text>
+            <text x='0' y='200' style='font-size: 16'> Possession</text>
+            <text x='0' y='220' style='font-size: 16'> phase</text>
+        </svg>
+<div id="hLegends">
+            <svg width="3000" height="140">
+<!--                <line x1="0" y1="10" x2="50" y2="10" style="stroke:black;stroke-width:2" />-->
+<!--                <text x='55' y='15'> Completed pass</text>-->
+<!--                <line x1="0" y1="60" x2="50" y2="60" style="stroke:black;stroke-width:2; stroke-dasharray:4" />-->
+<!--                <text x='55' y='65'> Incomplete pass</text>-->
+                <text x='0' y='100'>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ </text>
+<!--                <text x='0' y='135'> The possession phase represents the team's offensive possession.</text>-->
+            </svg>
+        </div>
+        <div id="qLegends">
+            <svg width="3000" height="140">
+<!--                <line x1="0" y1="10" x2="50" y2="10" style="stroke:black;stroke-width:2" />-->
+<!--                <text x='55' y='15'> Completed pass</text>-->
+<!--                <line x1="0" y1="60" x2="50" y2="60" style="stroke:black;stroke-width:2; stroke-dasharray:4" />-->
+<!--                <text x='55' y='65'> Incomplete pass</text>-->
+                <text x='0' y='100'> The waveform represents the passing frequency.</text>
+                <text x='0' y='135'> The possession phase represents the team's offensive possession.</text>
+            </svg>
+        </div>
+        <div id="sLegends">
+            <svg width="300" height="140">
+<!--                <line x1="0" y1="10" x2="50" y2="10" style="stroke:black;stroke-width:2" />-->
+<!--                <text x='55' y='15'> Completed pass</text>-->
+<!--                <line x1="0" y1="60" x2="50" y2="60" style="stroke:black;stroke-width:2; stroke-dasharray:4" />-->
+<!--                <text x='55' y='65'> Incomplete pass</text>-->
+                <text x='0' y='100'> Shooting scatter plot </text>
+<!--                <text x='0' y='135'> The possession phase represents the team's offensive possession.</text>-->
+            </svg>
+        </div>
+
+         <div id="lLegends">
+            <svg width="100" height="140">
+<!--                <line x1="0" y1="10" x2="50" y2="10" style="stroke:black;stroke-width:2" />-->
+<!--                <text x='55' y='15'> Completed pass</text>-->
+<!--                <line x1="0" y1="60" x2="50" y2="60" style="stroke:black;stroke-width:2; stroke-dasharray:4" />-->
+<!--                <text x='55' y='65'> Incomplete pass</text>-->
+                <text x='0' y='100'> Court</text>
+<!--                <text x='0' y='135'> The possession phase represents the team's offensive possession.</text>-->
+            </svg>
+        </div>
+
+        <div id="pics">
+            <div id="pic1"></div>
+            <div id="pic2"></div>
+        </div>
+        <div id="bottom_visuals">
+            <div id="selects" style="display: flex;">
+            <div id="shottracker">
+                <div id="svgcontainer"></div>
+            </div>
+            <div id="echarts_container">
+                <div id="main_echart_c" style="width: 450px;height:500px"></div>
+                <div id="main_echart" style="width: 450px;height:500px"></div>
+                <div id="main_echart_b" style="width: 450px;height:500px"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var dal_cn = ['Jose Juan Barea', 'Wesley Mattews', 'Chandler Parsons', 'Zaza Pachulia', 'Dirk Nowitzki', 'Raymond Felton', 'Deron Williams', 'Dwight Powell'];
+        var dal_p = [[0.0, 12.0, 12.0, 0.0, 0.0, 11.0, 0.0, 0.0], [10.0, 0.0, 0.0, 10.0, 0.0, 10.0, 0.0, 0.0], [11.0, 13.0, 0.0, 0.0, 12.0, 0.0, 0.0, 0.0], [12.0, 15.0, 14.0, 0.0, 0.0, 0.0, 0.0, 0.0], [11.0, 11.0, 0.0, 13.0, 0.0, 0.0, 0.0, 0.0], [6.0, 6.0, 0.0, 0.0, 9.0, 0.0, 0.0, 0.0], [7.0, 6.0, 8.0, 0.0, 0.0, 0.0, 0.0, 0.0], [8.0, 8.0, 0.0, 8.0, 0.0, 0.0, 0.0, 0.0]];
+        var cha_cn = ['Marvin Williams', 'Nicolas Batum', 'Kemba Walker', 'PJ Hairston', 'Cody Zeller', 'Frank Kaminsky', 'Jeremy Lamb', 'Tyler Hansbrough', 'Brian Roberts', 'Jeremy Lin'];
+        var cha_p = [[0.0, 6.0, 7.0, 5.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [10.0, 0.0, 7.0, 0.0, 8.0, 0.0, 0.0, 0.0, 0.0, 0.0], [8.0, 0.0, 0.0, 0.0, 7.0, 9.0, 0.0, 0.0, 0.0, 0.0], [9.0, 11.0, 6.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [6.0, 0.0, 0.0, 4.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0], [9.0, 6.0, 0.0, 0.0, 0.0, 0.0, 4.0, 0.0, 0.0, 0.0], [5.0, 0.0, 7.0, 0.0, 9.0, 0.0, 0.0, 0.0, 0.0, 0.0], [3.0, 6.0, 0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0, 0.0], [3.0, 0.0, 6.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [5.0, 6.0, 4.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]];
+        var nop_cn = ['Omer Asik', 'Eric Gordon', 'Alonzo Gee', 'Anthony Davis', 'Norris Cole', 'Toney Douglas', 'Dante Cunningham', 'Kendrick Perkins'];
+        var nop_p = [[0.0, 11.0, 10.0, 13.0, 0.0, 0.0, 0.0, 0.0], [14.0, 11.0, 0.0, 13.0, 0.0, 0.0, 0.0, 0.0], [15.0, 13.0, 0.0, 14.0, 0.0, 0.0, 0.0, 0.0], [12.0, 0.0, 0.0, 0.0, 12.0, 13.0, 0.0, 0.0], [8.0, 11.0, 14.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 9.0, 0.0, 8.0, 7.0, 0.0, 0.0, 0.0], [6.0, 0.0, 0.0, 9.0, 6.0, 0.0, 0.0, 0.0], [6.0, 0.0, 7.0, 0.0, 0.0, 5.0, 0.0, 0.0]];
+        var tor_cn = ['Luis Scola', 'DeMarre Carroll', 'Kyle Lowry', 'DeMar DeRozan', 'Jonas Valanciunas', 'Patrick Patterson', 'Cory Joseph'];
+        var tor_p = [[0.0, 7.0, 0.0, 8.0, 0.0, 10.0, 0.0], [9.0, 0.0, 0.0, 0.0, 7.0, 8.0, 0.0], [12.0, 10.0, 0.0, 8.0, 0.0, 0.0, 0.0], [8.0, 0.0, 0.0, 0.0, 8.0, 9.0, 0.0], [0.0, 6.0, 0.0, 0.0, 0.0, 5.0, 7.0], [4.0, 0.0, 9.0, 0.0, 0.0, 0.0, 6.0], [7.0, 0.0, 7.0, 8.0, 0.0, 0.0, 0.0]];
+
+        let main = new Main();
+        main
+            .selectdom("#main")
+            .game_id("0021500501")
+            .team_dom("#team")
+            .timeline("#timeline")
+            .draw();
+
+        function change() {
+            matchid = document.getElementById("match").value;
+            main
+                .selectdom("#main")
+                .game_id(matchid)
+                .team_dom("#team")
+                .timeline("#timeline")
+                .draw();
+            if (matchid == "0021500501") {
+                chord_chart(nop_cn, nop_p, "pic1");
+                chord_chart(dal_cn, dal_p, "pic2");
+            } else {
+                chord_chart(tor_cn, tor_p, "pic1");
+                chord_chart(cha_cn, cha_p, "pic2");
+            }
+        }
+
+        d3.csv(`./data/all_players.csv`)
+            .then(function (data) {
+                var defaultname = "aaa";
+                toulanweizhi(defaultname);
+            });
+    </script>
+</body>
+</html>

@@ -39,6 +39,6 @@ def split_csv(input_file, output_dir, max_size_mb=100):
 
 if __name__ == "__main__":
     # Run the function
-    input_file = './data/all_players_shooting_stats.csv'
+    input_file = './data/simplified_shooting_stats.csv'
     output_dir = './data'
     split_csv(input_file, output_dir)
