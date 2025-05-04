@@ -1,4 +1,4 @@
-minute,second,kongqiu_team,pass_player_name,pass_location_x,pass_location_y,jieqiu_team,jieqiu_player_name,end_location_x,end_location_y
+minute,second,kongqiu_team,pass_player_name,pass_location_y,pass_location_x,jieqiu_team,jieqiu_player_name,end_location_y,end_location_x
 0,1,NOP,Eric Gordon,67.11559,37.02484,NOP,Anthony Davis,67.93588,24.69887
 0,20,DAL,Jose Juan Barea,79.04347,36.1947,DAL,Chandler Parsons,85.12043,31.29813
 0,28,DAL,Chandler Parsons,82.76284,30.63862,DAL,Zaza Pachulia,84.41172,17.09116

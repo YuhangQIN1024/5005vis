@@ -8,7 +8,7 @@ def process(file_name: str):
     
     # Create new file to store passing data
     with open(f"./data/game/processed_{file_name.replace('.json', '.csv')}", "w") as f:
-        f.write("minute,second,kongqiu_team,pass_player_name,pass_location_x,pass_location_y,jieqiu_team,jieqiu_player_name,end_location_x,end_location_y\n")
+        f.write("minute,second,kongqiu_team,pass_player_name,pass_location_y,pass_location_x,jieqiu_team,jieqiu_player_name,end_location_y,end_location_x\n")
     
     # Append to data
     with open(f"./data/game/processed_{file_name.replace('.json', '.csv')}", "a") as f:

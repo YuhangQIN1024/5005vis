@@ -1,4 +1,4 @@
-minute,second,kongqiu_team,pass_player_name,pass_location_x,pass_location_y,jieqiu_team,jieqiu_player_name,end_location_x,end_location_y
+minute,second,kongqiu_team,pass_player_name,pass_location_y,pass_location_x,jieqiu_team,jieqiu_player_name,end_location_y,end_location_x
 0,3,TOR,Kyle Lowry,24.55198,42.59281,TOR,DeMar DeRozan,9.83596,36.41769
 0,6,TOR,DeMar DeRozan,6.76188,33.29123,TOR,Luis Scola,17.20629,13.14253
 0,10,TOR,DeMar DeRozan,4.19563,28.20097,TOR,Kyle Lowry,30.83724,35.03369
