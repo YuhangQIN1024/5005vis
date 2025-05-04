@@ -226,11 +226,19 @@
   <section class="tab-content" id="tab-game" role="tabpanel" aria-labelledby="tab-btn-game">
     <h2>Single Game Analysis</h2>
     <style>
+      .main-flex {
+        display: flex;
+        gap: 36px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
       .court-block-wrapper {
         width: 500px;
         display: flex;
         flex-direction: column;
-        align-items: flex-start; /* Align to left */
+        align-items: flex-start;
+        flex-shrink: 0;
       }
       .court-container {
         position: relative;
@@ -250,7 +258,7 @@
       }
       .legend {
         display: flex;
-        justify-content: flex-start;  /* Align to left */
+        justify-content: flex-start;
         align-items: center;
         margin: 8px 0 0 0;
         gap: 30px;
@@ -261,7 +269,11 @@
         align-items: center;
         margin: 0;
       }
-      @media (max-width: 600px) {
+      @media (max-width: 1100px) {
+        .main-flex {
+          flex-direction: column;
+          gap: 18px;
+        }
         .court-block-wrapper,
         .court-container {
           width: 100vw;
@@ -278,15 +290,73 @@
         }
       }
       #minute-range-slider .noUi-connect {
-          background: #888 !important;  /* grey track */
+          background: #888 !important;
       }
       #minute-range-slider .noUi-handle {
-          background: #bbb !important;  /* light grey handle */
+          background: #bbb !important;
           border: 1px solid #888 !important;
       }
       #minute-range-slider .noUi-base,
       #minute-range-slider .noUi-background {
-          background: #eee !important;  /* very light grey background track */
+          background: #eee !important;
+      }
+      .bar-chart-wrapper {
+        min-width: 0;
+        max-width: 100%;
+        overflow-x: auto;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 16px 10px 30px 30px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        position: relative;
+      }
+      .bar-chart-title {
+        text-align: left;
+        font-size: 20px;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      .bar-legend {
+        margin-top: 12px;
+        font-size: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+      }
+      .bar-legend span {
+        display: flex;
+        align-items: center;
+        margin-right: 18px;
+      }
+      .bar-legend-box {
+        width: 18px; height: 12px; display: inline-block; margin-right: 6px;
+        border-radius: 2px; border: 1px solid #bbb;
+      }
+      .bar-legend-line {
+        width: 18px; height: 3px; display: inline-block; margin-right: 6px;
+        border-radius: 1px;
+        vertical-align: middle;
+      }
+      .bar-tooltip {
+        pointer-events: none;
+        position: fixed;
+        display: none;
+        background: #fff;
+        border: 1px solid #888;
+        border-radius: 4px;
+        padding: 6px 12px;
+        font-size: 15px;
+        color: #111;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+        z-index: 400;
+        white-space: pre;
+        transform: translate(0, 0);
+        top: 0;
+        left: 0;
       }
     </style>
     <div style="margin-bottom:10px;">
@@ -306,31 +376,40 @@
       <div id="minute-range-slider" style="margin-top:10px;"></div>
     </div>
     <div id="loading" class="loading">Loading game data...</div>
-    <div class="court-block-wrapper">
-      <div class="court-container">
-        <svg id="court"></svg>
+    <div class="main-flex">
+      <div class="court-block-wrapper">
+        <div class="court-container">
+          <svg id="court"></svg>
+        </div>
+        <div class="legend">
+          <div class="legend-item">
+            <svg width="30" height="8" style="margin-right:5px;">
+              <defs>
+                <marker id="arrowhead-green" markerWidth="6" markerHeight="6" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <polygon points="0 0, 6 3, 0 6" fill="green"/>
+                </marker>
+                <marker id="arrowhead-red" markerWidth="6" markerHeight="6" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <polygon points="0 0, 6 3, 0 6" fill="red"/>
+                </marker>
+              </defs>
+              <line x1="2" y1="4" x2="28" y2="4" stroke="green" stroke-width="3" marker-end="url(#arrowhead-green)" />
+            </svg>
+            <span>Successful Pass</span>
+          </div>
+          <div class="legend-item">
+            <svg width="30" height="8" style="margin-right:5px;">
+              <line x1="2" y1="4" x2="28" y2="4" stroke="red" stroke-width="3" stroke-dasharray="5,4" marker-end="url(#arrowhead-red)" />
+            </svg>
+            <span>Failed Pass</span>
+          </div>
+        </div>
       </div>
-      <div class="legend">
-        <div class="legend-item">
-          <svg width="30" height="8" style="margin-right:5px;">
-            <defs>
-              <marker id="arrowhead-green" markerWidth="6" markerHeight="6" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
-                <polygon points="0 0, 6 3, 0 6" fill="green"/>
-              </marker>
-              <marker id="arrowhead-red" markerWidth="6" markerHeight="6" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
-                <polygon points="0 0, 6 3, 0 6" fill="red"/>
-              </marker>
-            </defs>
-            <line x1="2" y1="4" x2="28" y2="4" stroke="green" stroke-width="3" marker-end="url(#arrowhead-green)" />
-          </svg>
-          <span>Successful Pass</span>
-        </div>
-        <div class="legend-item">
-          <svg width="30" height="8" style="margin-right:5px;">
-            <line x1="2" y1="4" x2="28" y2="4" stroke="red" stroke-width="3" stroke-dasharray="5,4" marker-end="url(#arrowhead-red)" />
-          </svg>
-          <span>Failed Pass</span>
-        </div>
+      <!-- Bar Chart Section -->
+      <div class="bar-chart-wrapper">
+        <div class="bar-chart-title">Player Contributions & Ratings</div>
+        <svg id="player-stats-bar" width="600" height="500" style="display:block;"></svg>
+        <div class="bar-legend" id="bar-legend"></div>
+        <div class="bar-tooltip" id="bar-tooltip"></div>
       </div>
     </div>
     <!-- Tooltip -->
@@ -353,6 +432,10 @@
           if(i === j) c.classList.add('active');
           else c.classList.remove('active');
         });
+        // <-- ADD THIS: if tab is the Single Game tab, update bar chart
+        if (btn.id === "tab-btn-game") {
+          setTimeout(updateBarChart, 0);
+        }
       });
     });
   </script>
