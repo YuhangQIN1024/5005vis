@@ -222,11 +222,16 @@
       z-index: 1000;">
     </div>
   </section>
-
   <!-- Single Game Tab -->
   <section class="tab-content" id="tab-game" role="tabpanel" aria-labelledby="tab-btn-game">
     <h2>Single Game Analysis</h2>
     <style>
+      .court-block-wrapper {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Align to left */
+      }
       .court-container {
         position: relative;
         width: 500px;
@@ -235,91 +240,42 @@
         background-size: cover;
       }
       #court {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: 2;
-          background: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background: none;
       }
       .legend {
-          display: flex;
-          align-items: center;
-          margin: 10px 0;
-          justify-content: center;
-          flex-wrap: wrap;
+        display: flex;
+        justify-content: flex-start;  /* Align to left */
+        align-items: center;
+        margin: 8px 0 0 0;
+        gap: 30px;
+        width: 100%;
       }
-      
       .legend-item {
-          display: flex;
-          align-items: center;
-          margin: 0 15px;
+        display: flex;
+        align-items: center;
+        margin: 0;
       }
-      
-      .team-dot {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          margin-right: 5px;
-      }
-      
-      .tor-color {
-          background-color: #CE1141;
-      }
-      
-      .cha-color {
-          background-color: #1D1160;
-      }
-      
-      .pass-arrow {
-          fill: none;
-          stroke-width: 2;
-      }
-      
-      .tor-pass {
-          stroke: #CE1141;
-      }
-      
-      .cha-pass {
-          stroke: #1D1160;
-      }
-      
-      .pass-point {
-          r: 3;
-          stroke-width: 1;
-          stroke: #333;
-      }
-      
-      .tor-point {
-          fill: #CE1141;
-      }
-      
-      .cha-point {
-          fill: #1D1160;
-      }
-      
-      h1 {
-          color: #333;
-          text-align: center;
-          margin-top: 10px;
-      }
-      
-      .arrow-head {
-          fill: green;
-      }
-      
-      #toggle-team {
-          margin: 10px;
-          padding: 8px 12px;
-          background-color: #f0f0f0;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          cursor: pointer;
-      }
-      
-      #toggle-team:hover {
-          background-color: #e0e0e0;
+      @media (max-width: 600px) {
+        .court-block-wrapper,
+        .court-container {
+          width: 100vw;
+          max-width: 100%;
+          min-width: 0;
+        }
+        .legend {
+          width: 100vw;
+          max-width: 100%;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          font-size: 15px;
+          gap: 16px;
+        }
       }
       #minute-range-slider .noUi-connect {
           background: #888 !important;  /* grey track */
@@ -332,11 +288,6 @@
       #minute-range-slider .noUi-background {
           background: #eee !important;  /* very light grey background track */
       }
-      #minute-range-slider .noUi-tooltip {
-          background: #444 !important;  /* dark tooltip */
-          color: #fff !important;
-          border: none !important;
-      }
     </style>
     <div style="margin-bottom:10px;">
       <label for="game-select"><strong>Select Game:</strong></label>
@@ -346,7 +297,6 @@
     <form id="team-filter" style="margin: 15px 0;">
       <!-- radios will be inserted dynamically -->
     </form>
-    
     <!-- Time slider UI -->
     <div id="time-slider-wrapper" style="margin: 10px 0; max-width: 500px;">
       <label>
@@ -356,26 +306,35 @@
       <div id="minute-range-slider" style="margin-top:10px;"></div>
     </div>
     <div id="loading" class="loading">Loading game data...</div>
-    <div class="court-container">
+    <div class="court-block-wrapper">
+      <div class="court-container">
         <svg id="court"></svg>
-    </div>
-    <div class="legend" style="margin:8px 0;">
-      <div class="legend-item" style="display:flex;align-items:center;margin-right:20px;">
-        <svg width="30" height="8" style="margin-right:5px;">
-          <line x1="2" y1="4" x2="28" y2="4" stroke="green" stroke-width="3" marker-end="url(#arrowhead-green)" />
-        </svg>
-        <span>Successful Pass</span>
       </div>
-      <div class="legend-item" style="display:flex;align-items:center;margin-right:20px;">
-        <svg width="30" height="8" style="margin-right:5px;">
-          <line x1="2" y1="4" x2="28" y2="4" stroke="red" stroke-width="3" stroke-dasharray="5,4" marker-end="url(#arrowhead-red)" />
-        </svg>
-        <span>Failed Pass</span>
+      <div class="legend">
+        <div class="legend-item">
+          <svg width="30" height="8" style="margin-right:5px;">
+            <defs>
+              <marker id="arrowhead-green" markerWidth="6" markerHeight="6" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
+                <polygon points="0 0, 6 3, 0 6" fill="green"/>
+              </marker>
+              <marker id="arrowhead-red" markerWidth="6" markerHeight="6" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
+                <polygon points="0 0, 6 3, 0 6" fill="red"/>
+              </marker>
+            </defs>
+            <line x1="2" y1="4" x2="28" y2="4" stroke="green" stroke-width="3" marker-end="url(#arrowhead-green)" />
+          </svg>
+          <span>Successful Pass</span>
+        </div>
+        <div class="legend-item">
+          <svg width="30" height="8" style="margin-right:5px;">
+            <line x1="2" y1="4" x2="28" y2="4" stroke="red" stroke-width="3" stroke-dasharray="5,4" marker-end="url(#arrowhead-red)" />
+          </svg>
+          <span>Failed Pass</span>
+        </div>
       </div>
     </div>
     <!-- Tooltip -->
     <div id="arrow-tooltip" style="position: absolute; display: none; pointer-events:none; background: #fff; border:1px solid #888; border-radius:4px; padding:5px 10px; font-size:14px; z-index:1000;"></div>
-
     <script src="gameStats.js"></script>
   </section>
 

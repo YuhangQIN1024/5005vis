@@ -12,7 +12,7 @@ const xScale = d3.scaleLinear()
     .range([0, courtWidth]);
 const yScale = d3.scaleLinear()
     .domain([0, realCourtHeight])
-    .range([0, courtHeight]);
+    .range([courtHeight, 0]);
 
 let scaledData = [];
 let minuteExtent = [0, 48];
@@ -202,6 +202,7 @@ function loadGame(gameId) {
             console.error(err);
             d3.select("#loading").text("Error loading data.");
         });
+        console.log(scaledData.map(d => d.pass_location_x));
 }
 
 window.onload = function() {
